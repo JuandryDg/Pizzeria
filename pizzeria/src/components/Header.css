@@ -1,0 +1,26 @@
+.headerImg {
+  background-image: url("./public/Header.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 8rem;
+}
+.texto {
+  font-size: xx-large;
+  font-weight: bold;
+  color: aliceblue;
+  text-align: center;
+  padding-top: 15px;
+}
+
+.texto2 {
+  font-size: medium;
+  font-weight: bolder;
+  color: aliceblue;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.opacity {
+  backdrop-filter: brightness(50%);
+  height: 100%;
+}
