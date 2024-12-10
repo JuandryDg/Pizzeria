@@ -1,0 +1,43 @@
+.caja {
+  background-color: rgb(222, 239, 239);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  height: 20rem;
+  margin: 0 auto;
+  margin-top: 5rem;
+}
+.email {
+  width: 50rem;
+  padding: 5px;
+  margin-bottom: 50px;
+}
+.password {
+  width: 50rem;
+  padding: 5px;
+}
+
+.btn {
+  width: 7rem;
+  background-color: blue;
+  margin: 0 auto;
+  border-radius: 10%;
+  margin-top: 20px;
+  color: white;
+}
+
+label {
+  font-size: large;
+  font-weight: bolder;
+  font-style: oblique;
+  color: blue;
+  margin-left: 20px;
+}
+
+h1 {
+  font: bold;
+  font-weight: 900;
+  color: rgb(101, 85, 85);
+  text-align: center;
+}

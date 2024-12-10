@@ -1,13 +1,38 @@
-import Header from "./Header.jsx";
-import CardPizza from "./CardPizza";
+import Header from "../components/Header.jsx";
+// import pizzas from "../utils/pizzas.js";
+import CardPizza from "../components/CardPizza.jsx";
+import { useEffect, useState } from "react";
+
 function Home() {
+  const [pizzas, setPizzas] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/api/pizzas")
+      .then((res) => res.json())
+      .then((data) => {
+        setPizzas(data);
+        console.log(data);
+      });
+  }, []);
+
   return (
     <>
       <Header
         title="!Pizzería Mamma Mia! "
         description="!Tenemos las mejores pizzas que podrias encontrar"
       />
-      <div className="flex flex-row gap-x-10">
+      <h2 className="text-center font-bold text-2xl mb-8">Menu de pizzas</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {pizzas.map((pizza) => (
+          <CardPizza
+            key={pizza.id}
+            title={pizza.name}
+            img={pizza.img}
+            description={pizza.desc}
+            ingredients={pizza.ingredients}
+          />
+        ))}
+      </div>
+      {/* <div className="flex flex-row gap-x-10">
         <CardPizza
           imageSrc="https://www.pizzapizza.cl/wp-content/uploads/2021/01/espanola-web-scaled.jpg"
           title="Pizza Napolitana"
@@ -23,7 +48,7 @@ function Home() {
           title="Pizza Peperonni"
           description=" Precio: $5.990"
         />
-      </div>
+      </div>  */}
     </>
   );
 }

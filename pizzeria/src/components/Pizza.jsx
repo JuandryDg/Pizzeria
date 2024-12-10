@@ -1,14 +1,19 @@
 /* eslint-disable react/prop-types */
-function CardPizza({ img, title, description, ingredients }) {
+function Pizza({ pizza }) {
   return (
-    <div className="shadow-lg bg-gray-100 object-fit: cover p-4">
-      <img className="max-w-md" src={img} alt="Card Image" />
+    <div className="shadow-lg bg-gray-100 object-fit: cover p-4 h-screen flex">
+      <img
+        className="max-w-full  items-center justify-center "
+        src={pizza.img}
+        alt="Card Image"
+      />
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{title}</div>
-        <p className="text-gray-700 text-base">{description}</p>
+        <div className="font-bold text-xl mb-2">{pizza.name}</div>
+        <p className="text-gray-700 text-base">{pizza.desc}</p>
         <p className="text-gray-700 text-base gap-10">
-          INGREDIENTES :{ingredients}
+          INGREDIENTES :{pizza.ingredients}
         </p>
+        <p>precio: {pizza.price}</p>
       </div>
       <div className="px-6 pt-4 pb-2">
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -22,4 +27,4 @@ function CardPizza({ img, title, description, ingredients }) {
   );
 }
 
-export default CardPizza;
+export default Pizza;
