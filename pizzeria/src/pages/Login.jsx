@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 
 import React, { useState } from "react";
-import "./Form.css";
 
 const Login = () => {
   const [Email, setEmail] = useState("");
@@ -26,25 +25,29 @@ const Login = () => {
 
   return (
     <div>
-      <section className="caja">
-        <h1>LOGIN</h1>
-        <label>Email address</label>
+      <section className=" bg-cyan-950 flex flex-col items-center justify-center w-10/12 ml-28 min-h-96 mt-20">
+        <h1 className="text-white font-extrabold p-5">LOGIN</h1>
+        <label className="text-amber-500 font-bold m-4">Email address</label>
         <input
           type="email"
-          className="email"
+          className="p-3 w-5/6 rounded"
           placeholder="Enter email"
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <label>Password</label>
+        <label className="text-amber-500 font-bold m-4">Password</label>
         <input
           type="password"
-          className="password"
+          className="p-3 w-5/6 rounded"
           placeholder="Password"
           onChange={(e) => setClave(e.target.value)}
         />
 
-        <button className="btn" type="submit" onClick={handleSubmit}>
+        <button
+          className="p-3 w-32 bg-amber-500 rounded mt-2"
+          type="submit"
+          onClick={handleSubmit}
+        >
           Submit
         </button>
       </section>
