@@ -3,10 +3,11 @@ import { CiPizza } from "react-icons/ci";
 import { GiPadlock } from "react-icons/gi";
 import { GiPadlockOpen } from "react-icons/gi";
 import { Link } from "react-router-dom";
-
+import { useContext } from "react";
+import { CartContext } from "../Context/CartContext";
 function Navbar() {
-  const total = 25000;
   const token = true;
+  const { calculateTotal } = useContext(CartContext);
   return (
     <>
       <nav className="bg-gray-700  dark:bg-zinc-900">
@@ -23,7 +24,7 @@ function Navbar() {
               className=" border-x-blue-700 bg-gray-800 text-white  hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-blue-800"
             >
               <i className="fa-solid fa-cart-shopping"> </i> Total: ${" "}
-              {formatCurr(total)}
+              {formatCurr(calculateTotal())}
             </Link>
             <button
               data-collapse-toggle="navbar-cta"
