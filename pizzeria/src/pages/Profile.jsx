@@ -13,9 +13,6 @@ const Profile = () => {
         Apasionado por el diseño y desarrollo web, siempre en busca de nuevas
         soluciones creativas
       </p>
-      <button className="bg-slate-700 rounded p-3 mt-10 text-white font-bold ">
-        cerrar sesión
-      </button>
     </div>
   );
 };

@@ -1,10 +1,16 @@
 /* eslint-disable react/prop-types */
 import { useContext } from "react";
 import { CartContext } from "../Context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 function CardPizza({ pizza }) {
+  const navigate = useNavigate();
   // const { car, setCar } = useContext(CartContext);
   const { addToCart: addToCart } = useContext(CartContext);
+
+  const verDetalle = () => {
+    navigate(`/pizza/${pizza.id}`);
+  };
 
   return (
     <div className="shadow-lg bg-gray-100 p-4">
@@ -16,12 +22,18 @@ function CardPizza({ pizza }) {
           Ingredientes: {pizza.ingredients.join(", ")}
         </p>
       </div>
-      <div className="px-6 pt-4 pb-2">
+      <div className="px-6 pt-4 pb-2 ">
         <button
           onClick={() => addToCart(pizza)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-green-500 hover:bg-green-950 text-white font-bold py-2 px-4 rounded m-5"
         >
           Añadir
+        </button>
+        <button
+          onClick={verDetalle}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-5"
+        >
+          ver Detalle
         </button>
       </div>
     </div>

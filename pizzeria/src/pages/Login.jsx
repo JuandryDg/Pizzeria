@@ -1,8 +1,12 @@
 /* eslint-disable no-unused-vars */
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { CartContext } from "../Context/CartContext";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { setUser } = useContext(CartContext);
   const [Email, setEmail] = useState("");
   const [Clave, setClave] = useState("");
 
@@ -14,7 +18,8 @@ const Login = () => {
       if (longitud < 6) {
         alert("La contraseña debe tener al menos 6 caracteres");
       } else {
-        alert("enviado correctamente");
+        setUser(true);
+        navigate("/Profile");
       }
     } else {
       alert("faltan Datos");
