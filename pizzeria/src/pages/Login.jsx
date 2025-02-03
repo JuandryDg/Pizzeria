@@ -4,29 +4,26 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../Context/CartContext";
 
+import Cart from "./Cart";
+
 const Login = () => {
   const navigate = useNavigate();
-  const { setUser } = useContext(CartContext);
+  const { setToken } = useContext(CartContext);
   const [Email, setEmail] = useState("");
   const [Clave, setClave] = useState("");
+  const { login } = useContext(CartContext);
+  const { setUser } = useContext(CartContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const longitud = Clave.length;
-
-    if (Email && Clave) {
-      if (longitud < 6) {
-        alert("La contraseña debe tener al menos 6 caracteres");
-      } else {
-        setUser(true);
-        navigate("/Profile");
-      }
+    const success = await login(Email, Clave);
+    if (success) {
+      console.log("navegando a /profile");
+      navigate("/profile");
     } else {
-      alert("faltan Datos");
+      console.error("el login fallo");
     }
   };
-
-  function confirmarLongitud() {}
 
   return (
     <div>

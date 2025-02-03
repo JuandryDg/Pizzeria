@@ -1,12 +1,48 @@
 // import { useState } from "react";
 // import Pizzas from "../utils/pizzas";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../Context/CartContext";
 import "../App.css";
 function Cart() {
-  const { car: cart, setCar } = useContext(CartContext);
-  const { calculateTotal: calculateTotal } = useContext(CartContext);
-  const { user } = useContext(CartContext);
+  const {
+    car: cart,
+    setCar,
+    calculateTotal: calculateTotal,
+    user,
+    token,
+  } = useContext(CartContext);
+  const [message, setMessage] = useState("");
+
+  const handleCheckout = async () => {
+    if (!user || !token) {
+      setMessage("Debes iniciar sesión para realizar la compra.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/checkouts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ items: cart, total: calculateTotal() }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage("Compra realizada con éxito.");
+        setCar([]); // Vaciar carrito después de la compra
+      } else {
+        setMessage(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      setMessage("Error al procesar la compra.");
+      console.error(error);
+    }
+  };
+
   const increment = (id) => {
     setCar((prevCart) =>
       prevCart.map((item) =>
@@ -35,6 +71,7 @@ function Cart() {
       <h1 className="text-2xl font-semibold text-center mb-8">
         Carrito de compras
       </h1>
+      {message && <p className="text-center text-green-500">{message}</p>}
       {cart.length === 0 ? (
         <p className="text-center">Tu carrito está vacío.</p>
       ) : (
@@ -71,7 +108,12 @@ function Cart() {
           <h3>Total: ${calculateTotal()}</h3>
 
           {user ? (
-            <button className="bg-green-400 p-5 rounded">Pagar</button>
+            <button
+              onClick={handleCheckout}
+              className="bg-green-400 p-5 rounded"
+            >
+              Pagar
+            </button>
           ) : undefined}
         </div>
       )}

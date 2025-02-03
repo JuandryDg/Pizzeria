@@ -11,9 +11,11 @@ import NotFound from "./pages/NotFound";
 import Pizza from "./pages/Pizza";
 import { CartContext } from "./Context/CartContext";
 import { useContext } from "react";
+import { Navigate } from "react-router-dom";
 
 function App() {
-  const { user } = useContext(CartContext);
+  const { token } = useContext(CartContext);
+
   return (
     <>
       <div className="flex flex-col min-h-screen">
@@ -23,15 +25,12 @@ function App() {
         <Routes>
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="/home" element={<Home />}></Route>
-          <Route path="/login" element={user ? <Home /> : <Login />}></Route>
-          <Route
-            path="/register"
-            element={user ? <Home /> : <Register />}
-          ></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
           <Route
             path="/profile"
-            element={user ? <Profile /> : <Login />}
-          ></Route>
+            element={token ? <Profile /> : <Navigate to="/login" />}
+          />
           <Route path="*" element={<NotFound />}></Route>
           <Route path="/pizza/:id" element={<Pizza />}></Route>
         </Routes>

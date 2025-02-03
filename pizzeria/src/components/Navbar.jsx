@@ -8,11 +8,9 @@ import { CartContext } from "../Context/CartContext";
 import { CgProfile } from "react-icons/cg";
 import { IoLogOutOutline } from "react-icons/io5";
 function Navbar() {
-  const { user, setUser } = useContext(CartContext);
   const { calculateTotal } = useContext(CartContext);
-  const handleLogout = () => {
-    setUser(false);
-  };
+  const { token } = useContext(CartContext);
+  const { logout } = useContext(CartContext);
 
   return (
     <>
@@ -64,7 +62,7 @@ function Navbar() {
                 <CiPizza /> Home
               </NavLink>
 
-              {user === false ? (
+              {token === false ? (
                 <div className="flex flex-row gap-5">
                   <NavLink
                     to="/login"
@@ -99,7 +97,7 @@ function Navbar() {
                     id="logout"
                     className=" flex-row py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-red-600 md:dark:text-red-600 "
                   >
-                    <button onClick={handleLogout}>
+                    <button onClick={logout}>
                       <IoLogOutOutline />
                       Logout
                     </button>
